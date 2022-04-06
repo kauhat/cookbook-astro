@@ -1,0 +1,18 @@
+---
+import RecipePreview from '../../components/RecipePreview.astro';
+import {getAllRecipies, buildRecipePaths} from '../../data/recipies.ts'
+import {Recipe} from '@cooklang/cooklang-ts'
+
+export async function getStaticPaths({ paginate }) {
+    return await buildRecipePaths();
+
+
+    // return paginate(allRecipies, { pageSize: 10, param: 'recipe' });
+    // return allRecipies
+}
+
+const { recipe } = Astro.props
+---
+<div>
+    <RecipePreview recipe={recipe} />
+</div>

@@ -1,0 +1,26 @@
+---
+import { Recipe, Parser, getImageURL } from "@cooklang/cooklang-ts";
+
+export interface Props {
+	recipe: Recipe;
+}
+
+const { recipe } = Astro.props;
+---
+
+<article class="recipe-preview">
+	<header>
+		<p class="title">{recipe.metadata?.title}</p>
+		<p class="servings">Servings: {recipe.metadata?.servings}</p>
+	</header>
+	<!-- <ul>
+		{
+			recipe.steps.map((parts: unknown[]) => <li>{
+				JSON.stringify(parts)
+				// parts.reduce((previous, current) => (previous + String(current?.value)))
+			}</li>)
+		}
+	</ul> -->
+	<p>{JSON.stringify(recipe.shoppingList)}</p>
+	<a href={`/recipies/${recipe.metadata.name}`}>Read more</a>
+</article>
