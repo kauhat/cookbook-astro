@@ -1,22 +1,30 @@
-import { readdirSync } from 'fs'
-import { basename } from 'path'
+// import { readdirSync } from 'fs'
+// import { resolve, dirname, basename } from 'path-browserify'
 import { Recipe } from '@cooklang/cooklang-ts'
 
 // export function listRecipies() {
-//   const { RECIPIES_PATH } = import.meta.env
+//   const { VITE_RECIPIES_PATH } = import.meta.env
 
-//   readdirSync(RECIPIES_PATH).forEach((file: unknown) => {
+//   readdirSync(VITE_RECIPIES_PATH).forEach((file: unknown) => {
 //     return console.log(file)
 //   })
-
-//   console.log(`${RECIPIES_PATH}/**/*.cook`)
 // }
 
-export async function getAllRecipies(): Promise<Recipe[]> {
-  //
-  const globberArgs = { as: 'raw' }
+export async function getCooklangRecipieSources() {
+  const files = await import.meta.globEager('@recipies/**/*.cook', {
+    // as: 'cook',
+    // realpath: true,
+    // ssr: false,
+  })
 
-  const files = await import.meta.glob('./recipies/**/*.cook', globberArgs)
+  console.log({ files })
+
+  return files
+}
+
+export async function getAllRecipies(): Promise<Recipe[]> {
+  // Get source file paths and content as an object of keys and values.
+  const files = await getCooklangRecipieSources()
 
   // Initialse recipe classes from the source files.
   const recipies = Object.entries(files).map(function (file): Recipe {
@@ -27,25 +35,20 @@ export async function getAllRecipies(): Promise<Recipe[]> {
 
     // TODO: Allow using original values.
     recipe.metadata.path = path
-    recipe.metadata.title = basename(recipe.metadata.path, '.cook')
+    recipe.metadata.title = recipe.metadata.path // basename(recipe.metadata.path, '.cook')
 
     return recipe
   })
 
-  // console.log({ RECIPIES_PATH, files, recipies })
+  const { VITE_RECIPIES_PATH } = import.meta.env
+  console.log({ VITE_RECIPIES_PATH, files, recipies })
 
   return recipies
 }
 
-export async function buildRecipePaths(): Promise<unknown[]> {
-  const allRecipies = (await getAllRecipies()).map(function (recipe: Recipe) {
-    console.log(recipe)
-
-    return {
-      params: { recipe: recipe.metadata.title },
-      props: { recipe: recipe },
-    }
-  })
-
-  return allRecipies
+export async function buildRecipePath(recipe: Recipe) {
+  return {
+    params: { recipe: recipe?.metadata?.title },
+    props: { recipe: recipe },
+  }
 }
