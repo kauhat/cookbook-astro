@@ -17,7 +17,7 @@ export function ViteCooklangRecipeLoaderPlugin(
 
   const filter = createFilter(options.include ?? fileRegex, options.exclude)
 
-  const loadedRecipies: Map<string, Recipe> = new Map()
+  const loadedRecipes: Map<string, Recipe> = new Map()
 
   return {
     name: 'cooklang-loader',
@@ -38,7 +38,7 @@ export function ViteCooklangRecipeLoaderPlugin(
 
       // Parse the recipe...
       const recipe = new Recipe(source)
-      loadedRecipies.set(path, recipe)
+      loadedRecipes.set(path, recipe)
 
       // //
       return {

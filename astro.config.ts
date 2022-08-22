@@ -16,7 +16,7 @@ import { resolve } from 'path'
 
 import cooklangPlugin from './src/lib/vite-cooklang-loader'
 
-function getRecipiesPath() {
+function getRecipesPath() {
   const { VITE_RECIPIES_PATH } = loadEnv('', cwd())
 
   return resolve(VITE_RECIPIES_PATH)
@@ -52,7 +52,7 @@ export default defineConfig({
 
     resolve: {
       alias: {
-        '@recipies': getRecipiesPath(),
+        '@recipes': getRecipesPath(),
         ...stdLibBrowser,
       },
     },

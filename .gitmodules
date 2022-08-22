@@ -1,4 +1,4 @@
-[submodule "recipies"]
-	path = recipies
+[submodule "recipes"]
+	path = recipes
 	url = git@github.com:kauhat/Cookbook.git
 	branch = main

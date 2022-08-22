@@ -1,16 +1,16 @@
 ---
 import RecipePreview from '../components/RecipePreview.astro';
-import {getAllRecipies} from '../data/recipies.ts'
+import {getAllRecipes} from '../data/recipes.ts'
 import {Recipe} from '@cooklang/cooklang-ts'
 
-let allRecipies = await getAllRecipies()
+let allRecipes = await getAllRecipes()
 	// .map(function (recipe: Recipe) {
 	// 	return { params: { recipe }};
 	// });
 
-// console.log(allRecipies)
+// console.log(allRecipes)
 
-// allRecipies = allRecipies.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
+// allRecipes = allRecipes.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
 
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
@@ -57,10 +57,10 @@ let allRecipies = await getAllRecipies()
 		<div class="wrapper">
 			<main class="content">
 				<section class="intro">
-					<h1>Recipies</h1>
+					<h1>Recipes</h1>
 				</section>
 				<section aria-label="Blog post list">
-					{allRecipies.map((recipe: Recipe) => recipe && <RecipePreview recipe={recipe} />)}
+					{allRecipes.map((recipe: Recipe) => recipe && <RecipePreview recipe={recipe} />)}
 				</section>
 			</main>
 		</div>
