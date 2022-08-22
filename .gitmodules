@@ -1,0 +1,4 @@
+[submodule "recipies"]
+	path = recipies
+	url = git@github.com:kauhat/Cookbook.git
+	branch = main
