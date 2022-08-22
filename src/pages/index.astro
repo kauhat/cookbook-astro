@@ -1,9 +1,10 @@
 ---
 import RecipePreview from '../components/RecipePreview.astro';
-import {getAllRecipes} from '../data/recipes.ts'
+import {useRecipesStore} from '../stores/recipes.ts'
 import {Recipe} from '@cooklang/cooklang-ts'
 
-let allRecipes = await getAllRecipes()
+let allRecipes = useRecipesStore().getAllRecipes()
+
 	// .map(function (recipe: Recipe) {
 	// 	return { params: { recipe }};
 	// });
