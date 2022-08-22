@@ -1,15 +1,15 @@
 ---
-import RecipePreview from '../../components/RecipePreview.astro';
-import {getAllRecipies, buildRecipePath} from '../../data/recipies.ts'
-import {Recipe} from '@cooklang/cooklang-ts'
+import RecipePreview from '../../components/RecipePreview.astro'
+import { getAllRecipies, buildRecipePath } from '../../data/recipies.ts'
+import { Recipe } from '@cooklang/cooklang-ts'
 
 export async function getStaticPaths() {
-
-    const paths = (await getAllRecipies()).map(await buildRecipePath);
+    const paths = (await getAllRecipies())
+        .map(await buildRecipePath)
 
     console.log(paths)
 
-    return paths;
+    return paths
 
     // console.log(await Astro.glob('@recipies/**/*.cook'));
 
@@ -21,6 +21,7 @@ export async function getStaticPaths() {
 
 const { recipe } = Astro.props
 ---
+
 <div>
     <RecipePreview recipe={recipe} />
 </div>

@@ -37,5 +37,5 @@ const { recipe } = Astro.props;
 	</ul>
 
 	<p>{JSON.stringify(recipe.shoppingList)}</p>
-	<a href={`/recipies/${recipe.metadata.name}`}>Read more</a>
+	<a href={`/recipies/${recipe.metadata.path}`}>Read more</a>
 </article>
