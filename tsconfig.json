@@ -1,12 +1,16 @@
+// Example: starter tsconfig.json for Astro projects
 {
   "compilerOptions": {
-    "esModuleInterop": true,
-    "strict": true,
-    "module": "ES2020",
-    "moduleResolution": "Node12",
-    "lib": [
-      "DOM",
-      "ESNext",
-    ]
+    // Enable top-level await and other modern ESM features.
+    "target": "ESNext",
+    "module": "ESNext",
+    // Enable node-style module resolution, for things like npm package imports.
+    "moduleResolution": "node",
+    // Enable JSON imports.
+    "resolveJsonModule": true,
+    // Enable stricter transpilation for better output.
+    "isolatedModules": true,
+    // Astro will directly run your TypeScript code, no transpilation needed.
+    "noEmit": true
   }
 }
