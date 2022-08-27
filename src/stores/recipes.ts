@@ -5,22 +5,24 @@ import { createApp } from 'vue'
 import { Recipe } from '@cooklang/cooklang-ts'
 
 const pinia = createPinia()
-createApp().use(pinia)
+
+// Create a Vue instance for Pinia...
+// TODO: Is this weird?
+createApp({}).use(pinia)
 
 export const useRecipesStore = defineStore('recipes', {
   state: () => {
-    return { recipes: [] }
+    const recipes = getAllRecipes()
+
+    return { recipes }
   },
-  // could also be defined as
-  // state: () => ({ count: 0 })
+
   actions: {
-    getAllRecipes() {
-      this.recipes
+    async getAllRecipes() {
+      return await this.recipes
     },
   },
 })
-
-
 
 // export function listRecipes() {
 //   const { VITE_RECIPES_PATH } = import.meta.env
@@ -30,19 +32,15 @@ export const useRecipesStore = defineStore('recipes', {
 //   })
 // }
 
-export async function getRecipeSources(): Promise<[string, unknown][]> {
-  const files = await import.meta.globEager('@recipes/**/*.cook', {
-    as: 'cook',
-    // realpath: true,
-    // ssr: false,
-  })
+async function getRecipeSources(): Promise<[string, unknown][]> {
+  const files = await import.meta.globEager('@recipes/**/*.cook', {})
 
-  // console.log({ files })
+  console.log({ files })
 
   return files
 }
 
-export async function getAllRecipes(): Promise<Recipe[]> {
+async function getAllRecipes(): Promise<Recipe[]> {
   // Get source file paths and content as an object of keys and values.
   const files = await getRecipeSources()
 
