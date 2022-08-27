@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config'
-import { loadEnv } from 'vite'
 import eslintPlugin from 'vite-plugin-eslint'
 
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
@@ -11,54 +10,44 @@ import inject from '@rollup/plugin-inject'
 import stdLibBrowser from 'node-stdlib-browser'
 
 import vue from '@astrojs/vue'
-import { cwd } from 'process'
-import { resolve } from 'path'
 
-import cooklangPlugin from './src/lib/vite-cooklang-loader'
-
-function getRecipesPath() {
-  const { VITE_RECIPIES_PATH } = loadEnv('', cwd())
-
-  return resolve(VITE_RECIPIES_PATH)
-}
+import {
+  ViteCooklangRecipeLoaderPlugin,
+  getRecipesPath,
+} from './src/lib/vite-cooklang-loader'
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [vue()],
+  integrations: [
+    vue(),
+    // {
+    //   name: 'pinia',
+    //   hooks: {
+    //     'astro:config:setup': ({ injectScript }) => {
+    //       // injectScript("page-ssr", "const pinia = createPinia(); app.use(pinia); console.log(pinea)")
+    //     },
+    //   },
+    // }
+  ],
 
   vite: {
     plugins: [
-      eslintPlugin(),
       // browserifyPlugin(resolve),
-      cooklangPlugin(),
-      {
-        ...inject({
-          // global: [
-          //   import('node-stdlib-browser/helpers/esbuild/shim'),
-          //   'global',
-          // ],
-          // process: [
-          //   import('node-stdlib-browser/helpers/esbuild/shim'),
-          //   'process',
-          // ],
-          // Buffer: [
-          //   import('node-stdlib-browser/helpers/esbuild/shim'),
-          //   'Buffer',
-          // ],
-        }),
-        enforce: 'post',
-      },
+      ViteCooklangRecipeLoaderPlugin(),
+      // eslintPlugin(),
     ],
 
     resolve: {
       alias: {
         '@recipes': getRecipesPath(),
-        ...stdLibBrowser,
+        // ...stdLibBrowser,
       },
     },
 
     optimizeDeps: {
-      include: ['buffer', 'process', '@cooklang/cooklang-ts'],
+      include: [
+        // 'buffer', 'process', '@cooklang/cooklang-ts'
+      ],
     },
 
     build: {
