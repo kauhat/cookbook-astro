@@ -1,41 +1,41 @@
 ---
-import { Recipe, Parser, getImageURL, Step } from "@cooklang/cooklang-ts";
+import { Recipe, Parser, getImageURL, Step } from '@cooklang/cooklang-ts'
 
 export interface Props {
-	recipe: Recipe;
+  recipe: Recipe
 }
 
-const { recipe } = Astro.props;
+const { recipe } = Astro.props
 ---
 
 <article class="recipe-preview">
-	<header>
-		<p class="title">{recipe.metadata?.title}</p>
-		<p class="servings">Servings: {recipe.metadata?.servings}</p>
-	</header>
+  <header>
+    <p class="title">{recipe.metadata?.title}</p>
+    <p class="servings">Servings: {recipe.metadata?.servings}</p>
+  </header>
 
-	<ul>
-		{
-			recipe.steps.map((parts: unknown[]) => (
-				<li>
-					{ JSON.stringify(parts) }
+  <ul>
+    {
+      recipe.steps.map((parts: unknown[]) => (
+        <li>
+          {JSON.stringify(parts)}
 
-					{
-						parts
-						// parts.reduce(
-						// 	function (previous, current: unknown): string {
-						// 		return (
-						// 			{previous + String(current?.value)}
-						// 		)
-						// 	},
-						// 	''
-						// );
-					}
-				</li>
-			))
-		}
-	</ul>
+          {
+            parts
+            // parts.reduce(
+            // 	function (previous, current: unknown): string {
+            // 		return (
+            // 			{previous + String(current?.value)}
+            // 		)
+            // 	},
+            // 	''
+            // );
+          }
+        </li>
+      ))
+    }
+  </ul>
 
-	<p>{JSON.stringify(recipe.shoppingList)}</p>
-	<a href={`/recipes/${recipe.metadata.path}`}>Read more</a>
+  <p>{JSON.stringify(recipe.shoppingList)}</p>
+  <a href={`/recipes/${recipe.metadata.path}`}>Read more</a>
 </article>
