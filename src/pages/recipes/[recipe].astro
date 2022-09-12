@@ -1,9 +1,8 @@
 ---
 import RecipePreview from '../../components/RecipePreview.vue'
 import { useRecipesStore, buildRecipePath } from '../../stores/recipes.ts'
-
-import { Recipe } from '@cooklang/cooklang-ts'
-
+import Steps from '../../components/Steps.vue'
+import Ingredients from '../../components/Ingredients.vue'
 
 export async function getStaticPaths() {
   const recipesStore = useRecipesStore();
@@ -22,5 +21,13 @@ const { recipe } = Astro.props
 
 <div>
   <a href="/">Back to all recipes</a>
-  <RecipePreview recipe={recipe} />
+  <h1>{recipe.metadata.title}</h1>
+
+  <h3>Ingredients</h3>
+  <Ingredients recipe={recipe} />
+
+  <h3>Steps</h3>
+  <Steps recipe={recipe} />
+
+  <!-- <RecipePreview recipe={recipe} /> -->
 </div>
