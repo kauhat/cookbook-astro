@@ -1,28 +1,26 @@
 ---
-import RecipePreview from '../../components/RecipePreview.astro'
-import { useRecipesStore } from '../stores/recipes.ts'
+import RecipePreview from '../../components/RecipePreview.vue'
+import { useRecipesStore, buildRecipePath } from '../../stores/recipes.ts'
 
 import { Recipe } from '@cooklang/cooklang-ts'
 
+
 export async function getStaticPaths() {
-  const paths = useRecipesStore().getAllRecipes()
-  // .map(await buildRecipePath)
+  const recipesStore = useRecipesStore();
 
-  console.log(paths)
+  const paths = (await recipesStore.recipePaths)
 
-  return paths
+  // console.log(JSON.stringify({paths}))
 
-  // console.log(await Astro.glob('@recipes/**/*.cook'));
-
-  // return {}
-
-  // return paginate(allRecipes, { pageSize: 10, param: 'recipe' });
-  // return allRecipes
+  return [
+    ...paths,
+  ]
 }
 
 const { recipe } = Astro.props
 ---
 
 <div>
+  <a href="/">Back to all recipes</a>
   <RecipePreview recipe={recipe} />
 </div>

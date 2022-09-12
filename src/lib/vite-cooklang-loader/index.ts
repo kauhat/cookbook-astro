@@ -30,6 +30,7 @@ export function ViteCooklangRecipeLoaderPlugin(
 
   // const loadedRecipes: Map<string, Recipe> = new Map()
 
+
   return {
     name: 'cooklang-loader',
     // enforce: 'pre',
@@ -44,6 +45,7 @@ export function ViteCooklangRecipeLoaderPlugin(
       const [path, _query] = id.split('?', 2)
       // const resolvedPath = realpathSync(path)
 
+
       // const source: string = await readFile(path, 'utf-8')
       // return
 
@@ -51,15 +53,18 @@ export function ViteCooklangRecipeLoaderPlugin(
       const recipe = new Recipe(source)
       // loadedRecipes.set(path, recipe)
 
+      // console.log({recipe})
+
       // //
       return {
         code: `
-            import { Recipe } from '@cooklang/cooklang-ts'
+            // import { Recipe } from '@cooklang/cooklang-ts'
 
             export const source = ${JSON.stringify(source)}
-            export const recipe = new Recipe(source)
+            export const object = ${recipe.toJSON()}
+            // export const recipe = new Recipe(source)
 
-            export default recipe
+            export default source
 
             // export default ${JSON.stringify(recipe)}
           `,

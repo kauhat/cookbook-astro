@@ -4,11 +4,11 @@ import RecipePreview from '../components/RecipePreview.vue'
 import { useRecipesStore } from '../stores/recipes.ts'
 import { Recipe } from '@cooklang/cooklang-ts'
 
-const store = useRecipesStore()
-const { state } = store
-const allRecipes = await store.getAllRecipes()
+const recipesStore = useRecipesStore();
 
-console.log({ store, state, allRecipes })
+const allRecipes = await recipesStore.recipes
+
+// console.log({ store, state, allRecipes })
 
 // .map(function (recipe: Recipe) {
 // 	return { params: { recipe }};

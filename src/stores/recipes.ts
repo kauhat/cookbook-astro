@@ -13,8 +13,12 @@ createApp({}).use(pinia)
 export const useRecipesStore = defineStore('recipes', {
   state: () => {
     const recipes = getAllRecipes()
+    const recipePaths = getAllRecipes()
+      .then((recipes) => recipes.map((recipe) => buildRecipePath(recipe)))
 
-    return { recipes }
+      console.log({recipePaths})
+
+    return { recipes, recipePaths }
   },
 
   actions: {
@@ -32,49 +36,59 @@ export const useRecipesStore = defineStore('recipes', {
 //   })
 // }
 
-async function getRecipeSources(): Promise<[string, unknown][]> {
-  const files = await import.meta.globEager('@recipes/**/*.cook', {})
+interface RecipeSource {
+  path: string,
+  content: string,
+}
 
-  console.log({ files })
+async function getRecipeSources(): Promise<RecipeSource[]> {
+  const files = await import.meta.glob('@recipes/**/*.cook', {
+    eager: true,
+    as: 'raw'
+  })
 
-  return files
+  return Object.entries(files).map((file): RecipeSource => {
+    const [path, content] = file;
+
+    return {
+      path,
+      content
+    }
+  });
 }
 
 async function getAllRecipes(): Promise<Recipe[]> {
+  const { VITE_RECIPES_PATH } = import.meta.env
+
   // Get source file paths and content as an object of keys and values.
-  const files = await getRecipeSources()
+  const sources = await getRecipeSources()
 
   //
-  const recipes = Object.entries(files).map(function (file): Recipe {
-    const [path, content]: [string, unknown] = file
+  const recipes = sources.map(({path, content}): Recipe => {
 
     // Initialise a recipe class from the source file.
-    const recipe = new Recipe(String(content))
+    const recipe = new Recipe(content)
 
-    // TODO: Allow using original values.
-    recipe.metadata.path = path
-      .toLowerCase()
-      .replace(/\.cook/g, '') // Trim extension...
-      .replace(/[\s]/g, '-') // Add hyphens...
-      .replace(/[!'()*]/g, '') // Remove other special characters.
+    // Get the file name from path...
+    const fileName = path.substring( path.lastIndexOf('/') + 1)
+    .toLowerCase()
+    .replace(/\.cook/g, '') // Trim extension...
+    .replace(/[\s]/g, '-') // Add hyphens...
+    .replace(/[!'()*]/g, '') // Remove other special characters.
 
-    recipe.metadata.title = recipe.metadata.path // basename(recipe.metadata.path, '.cook')
-
-    // console.log(recipe)
+    // Add extra details to metadata...
+    recipe.metadata.fileName = fileName
+    recipe.metadata.title = recipe.metadata.title || fileName
 
     return recipe
   })
 
-  const { VITE_RECIPES_PATH } = import.meta.env
-
-  // console.log({ VITE_RECIPES_PATH, files, recipes })
-
   return recipes
 }
 
-export async function buildRecipePath(recipe: Recipe) {
+export function buildRecipePath(recipe: Recipe) {
   return {
-    params: { recipe: recipe?.metadata?.path },
-    props: { recipe: recipe },
+    params: { recipe: recipe.metadata.fileName },
+    props: { recipe },
   }
 }

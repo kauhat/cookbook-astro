@@ -28,7 +28,7 @@
     </ul>
 
     <p>{{JSON.stringify(recipe)}}</p>
-    <a :href="`/recipes/${recipe.metadata.path}`">Read more</a>
+    <a :href="recipeUrl">Read more</a>
   </div>
 </template>
 
@@ -41,10 +41,13 @@ export default defineComponent({
     recipe: Recipe,
   },
   setup({ recipe }) {
-    console.log(recipe)
+    // console.log(recipe)
+
+    const recipeUrl = `/recipes/${recipe.metadata.fileName}`
 
     return {
       // recipe
+      recipeUrl,
     }
   },
 })
