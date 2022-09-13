@@ -3,9 +3,9 @@
 import RecipePreview from '../components/RecipePreview.vue'
 import { useRecipesStore } from '../stores/recipes.ts'
 import { Recipe } from '@cooklang/cooklang-ts'
-import BaseLayout from '../layouts/BaseLayout.astro';
+import BaseLayout from '../layouts/BaseLayout.astro'
 
-const recipesStore = useRecipesStore();
+const recipesStore = useRecipesStore()
 
 const allRecipes = await recipesStore.recipes
 
@@ -22,17 +22,18 @@ const allRecipes = await recipesStore.recipes
 // Full Astro Component Syntax:
 // https://docs.astro.build/core-concepts/astro-components/
 ---
-<BaseLayout>
-        <section class="intro prose">
-          <h1>Recipes</h1>
-        </section>
 
-        <section aria-label="Blog post list">
-          {
-            allRecipes.map(
-              (recipe: Recipe) =>
-                recipe && <RecipePreview recipe={recipe} />
-            )
-          }
-        </section>
+<BaseLayout title="All recipes">
+  <section class="intro text-center py-4">
+    <h1 class="font-display font-thin text-5xl">Recipes</h1>
+  </section>
+
+  <section class="grid grid-cols-4 gap-4">
+    {
+      allRecipes.map(
+        (recipe: Recipe) =>
+          recipe && <RecipePreview recipe={recipe} class="card-compact" />
+      )
+    }
+  </section>
 </BaseLayout>

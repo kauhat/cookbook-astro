@@ -3,26 +3,43 @@ import RecipePreview from '../../components/RecipePreview.vue'
 import { useRecipesStore, buildRecipePath } from '../../stores/recipes.ts'
 import Steps from '../../components/Steps.vue'
 import Ingredients from '../../components/Ingredients.vue'
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro'
 
 export async function getStaticPaths() {
-  const recipesStore = useRecipesStore();
+  const recipesStore = useRecipesStore()
 
-  const paths = (await recipesStore.recipePaths)
+  const paths = await recipesStore.recipePaths
 
   // console.log(JSON.stringify({paths}))
 
-  return [
-    ...paths,
-  ]
+  return [...paths]
 }
 
 const { recipe } = Astro.props
+
+const { title, servings } = recipe.metadata
 ---
 
-<BaseLayout>
-  <a href="/">Back to all recipes</a>
-  <h1>{recipe.metadata.title}</h1>
+<BaseLayout title={title}>
+  <li slot="menu">
+    <a href="/">Back to all recipes</a>
+  </li>
+
+  <section class="intro text-center mb-4">
+    <h1 class="font-display font-thin text-5xl mb-2">{title}</h1>
+
+    <div class="stats shadow">
+      <div class="stat">
+        <div class="stat-title">Servings</div>
+        <div class="stat-value">{servings}</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-title">Cooking time</div>
+        <div class="stat-value">{servings}</div>
+      </div>
+    </div>
+  </section>
 
   <h3>Ingredients</h3>
   <Ingredients recipe={recipe} />
