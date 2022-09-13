@@ -3,6 +3,7 @@ import RecipePreview from '../../components/RecipePreview.vue'
 import { useRecipesStore, buildRecipePath } from '../../stores/recipes.ts'
 import Steps from '../../components/Steps.vue'
 import Ingredients from '../../components/Ingredients.vue'
+import BaseLayout from '../../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const recipesStore = useRecipesStore();
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
 const { recipe } = Astro.props
 ---
 
-<div>
+<BaseLayout>
   <a href="/">Back to all recipes</a>
   <h1>{recipe.metadata.title}</h1>
 
@@ -30,4 +31,4 @@ const { recipe } = Astro.props
   <Steps recipe={recipe} />
 
   <!-- <RecipePreview recipe={recipe} /> -->
-</div>
+</BaseLayout>

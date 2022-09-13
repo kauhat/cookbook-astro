@@ -1,25 +1,19 @@
-import { defineConfig } from 'astro/config'
-import eslintPlugin from 'vite-plugin-eslint'
+import { defineConfig } from 'astro/config';
+import eslintPlugin from 'vite-plugin-eslint';
+import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
+import rollupNodePolyFill from 'rollup-plugin-node-polyfills';
+import inject from '@rollup/plugin-inject';
+import stdLibBrowser from 'node-stdlib-browser';
+import vue from '@astrojs/vue';
+import tailwind from '@astrojs/tailwind';
+import { ViteCooklangRecipeLoaderPlugin, getRecipesPath } from './src/lib/vite-cooklang-loader';
 
-import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill'
-import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
-import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
-
-import inject from '@rollup/plugin-inject'
-
-import stdLibBrowser from 'node-stdlib-browser'
-
-import vue from '@astrojs/vue'
-
-import {
-  ViteCooklangRecipeLoaderPlugin,
-  getRecipesPath,
-} from './src/lib/vite-cooklang-loader'
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
-    vue(),
+    vue(), tailwind()
     // {
     //   name: 'pinia',
     //   hooks: {
@@ -29,35 +23,28 @@ export default defineConfig({
     //   },
     // }
   ],
-
   vite: {
     plugins: [
       // browserifyPlugin(resolve),
-      ViteCooklangRecipeLoaderPlugin(),
+      // ViteCooklangRecipeLoaderPlugin()
       // eslintPlugin(),
     ],
-
     resolve: {
       alias: {
-        '@recipes': getRecipesPath(),
-        // ...stdLibBrowser,
-      },
+        '@recipes': getRecipesPath() // ...stdLibBrowser,
+      }
     },
-
     optimizeDeps: {
-      include: [
-        // 'buffer', 'process', '@cooklang/cooklang-ts'
-      ],
+      include: [// 'buffer', 'process', '@cooklang/cooklang-ts'
+      ]
     },
-
-    build: {
-      // rollupOptions: {
+    build: {// rollupOptions: {
       //   plugins: [
       //     // Enable rollup polyfills plugin
       //     // used during production bundling
       //     rollupNodePolyFill(),
       //   ],
       // },
-    },
-  },
-})
+    }
+  }
+});

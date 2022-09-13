@@ -1,33 +1,10 @@
 <template>
-  <div class="recipe-preview">
+  <div class="recipe-preview prose">
     <header>
-      <p class="title">{{recipe.metadata?.title}}</p>
-      <p class="servings">Servings: {{recipe.metadata?.servings}}</p>
+      <h3 class="title">{{recipe.metadata?.title}}</h3>
+      <p class="servings">Servings: {{recipe.metadata?.servings ?? '??'}}</p>
     </header>
 
-    <ul>
-      {
-      <!-- recipe.steps.map((parts: unknown[]) => (
-				<li>
-					{ JSON.stringify(parts) }
-
-					{
-						parts
-						// parts.reduce(
-						// 	function (previous, current: unknown): string {
-						// 		return (
-						// 			{previous + String(current?.value)}
-						// 		)
-						// 	},
-						// 	''
-						// );
-					}
-				</li>
-			)) -->
-      }
-    </ul>
-
-    <p>{{JSON.stringify(recipe)}}</p>
     <a :href="recipeUrl">Read more</a>
   </div>
 </template>
@@ -41,7 +18,7 @@ export default defineComponent({
     recipe: Recipe,
   },
   setup({ recipe }) {
-    // console.log(recipe)
+    console.log(recipe)
 
     const recipeUrl = `/recipes/${recipe.metadata.fileName}`
 

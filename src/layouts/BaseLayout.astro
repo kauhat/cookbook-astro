@@ -1,0 +1,32 @@
+---
+import "../global.css"
+const {title} = Astro.props;
+---
+
+<html lang="en" data-theme="cupcake">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <div class="navbar bg-base-100">
+      <div class="md:container md:mx-auto">
+        <div class="flex-1">
+          <a class="btn btn-ghost normal-case text-xl">Recipes</a>
+        </div>
+
+        <div class="flex-none">
+          <ul class="menu menu-horizontal p-0">
+            <li><a href="/">All recipes</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="md:container md:mx-auto mt-8 mb-4">
+      <slot />
+    </div>
+  </body>
+</html>

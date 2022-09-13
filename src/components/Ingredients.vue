@@ -1,5 +1,5 @@
 <template>
-  <div class="recipe-steps">
+  <div class="recipe-steps prose prose-lg">
     <ul>
       <li v-for="ingredient in recipe.shoppingList">
         {{ JSON.stringify(ingredient) }}
