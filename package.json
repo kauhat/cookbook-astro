@@ -34,6 +34,7 @@
   "dependencies": {
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
+    "@fontsource/league-spartan": "^4.5.11",
     "@rollup/plugin-inject": "^4.0.4",
     "@tailwindcss/typography": "^0.5.7",
     "autoprefixer": "^10.4.9",
