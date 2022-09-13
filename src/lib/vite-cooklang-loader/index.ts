@@ -30,7 +30,6 @@ export function ViteCooklangRecipeLoaderPlugin(
 
   // const loadedRecipes: Map<string, Recipe> = new Map()
 
-
   return {
     name: 'cooklang-loader',
     // enforce: 'pre',
@@ -44,7 +43,6 @@ export function ViteCooklangRecipeLoaderPlugin(
       // Resolve the imported path and load the file.
       const [path, _query] = id.split('?', 2)
       // const resolvedPath = realpathSync(path)
-
 
       // const source: string = await readFile(path, 'utf-8')
       // return

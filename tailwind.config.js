@@ -6,7 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         display: ['League Spartan', ...defaultTheme.fontFamily.sans],
-      }
+      },
     },
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
