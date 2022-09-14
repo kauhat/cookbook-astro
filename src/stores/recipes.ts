@@ -13,10 +13,11 @@ createApp({}).use(pinia)
 export const useRecipesStore = defineStore('recipes', {
   state: () => {
     const recipes = getAllRecipes()
-    const recipePaths = getAllRecipes()
-      .then((recipes) => recipes.map((recipe) => buildRecipePath(recipe)))
+    const recipePaths = getAllRecipes().then((recipes) =>
+      recipes.map((recipe) => buildRecipePath(recipe))
+    )
 
-      console.log({recipePaths})
+    console.log({ recipePaths })
 
     return { recipes, recipePaths }
   },
@@ -37,24 +38,24 @@ export const useRecipesStore = defineStore('recipes', {
 // }
 
 interface RecipeSource {
-  path: string,
-  content: string,
+  path: string
+  content: string
 }
 
 async function getRecipeSources(): Promise<RecipeSource[]> {
   const files = await import.meta.glob('@recipes/**/*.cook', {
     eager: true,
-    as: 'raw'
+    as: 'raw',
   })
 
   return Object.entries(files).map((file): RecipeSource => {
-    const [path, content] = file;
+    const [path, content] = file
 
     return {
       path,
-      content
+      content,
     }
-  });
+  })
 }
 
 async function getAllRecipes(): Promise<Recipe[]> {
@@ -64,17 +65,17 @@ async function getAllRecipes(): Promise<Recipe[]> {
   const sources = await getRecipeSources()
 
   //
-  const recipes = sources.map(({path, content}): Recipe => {
-
+  const recipes = sources.map(({ path, content }): Recipe => {
     // Initialise a recipe class from the source file.
     const recipe = new Recipe(content)
 
     // Get the file name from path...
-    const fileName = path.substring( path.lastIndexOf('/') + 1)
-    .toLowerCase()
-    .replace(/\.cook/g, '') // Trim extension...
-    .replace(/[\s]/g, '-') // Add hyphens...
-    .replace(/[!'()*]/g, '') // Remove other special characters.
+    const fileName = path
+      .substring(path.lastIndexOf('/') + 1)
+      .toLowerCase()
+      .replace(/\.cook/g, '') // Trim extension...
+      .replace(/[\s]/g, '-') // Add hyphens...
+      .replace(/[!'()*]/g, '') // Remove other special characters.
 
     // Add extra details to metadata...
     recipe.metadata.fileName = fileName
