@@ -10,7 +10,7 @@ const { title } = Astro.props
     <title>{title}</title>
   </head>
 
-  <body>
+  <body class="flex flex-col min-h-screen">
     <div class="navbar shadow-sm">
       <div class="md:container md:mx-auto">
         <div class="flex-1">
@@ -27,7 +27,7 @@ const { title } = Astro.props
       </div>
     </div>
 
-    <div class="md:container md:mx-auto mt-8 mb-4">
+    <div class="md:container md:mx-auto mt-8 mb-4 flex flex-col grow">
       <slot />
     </div>
   </body>
