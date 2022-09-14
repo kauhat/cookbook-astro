@@ -1,6 +1,6 @@
 <template>
   <div class="recipe-steps">
-    <ul>
+    <ul class="list-disc">
       <li v-for="step in steps">
         {{ step }}
       </li>
@@ -25,7 +25,24 @@ export default defineComponent({
           }
 
           if (value.type === 'ingredient') {
-            return total + `${value.name} (${value.quantity}${value.units})`
+            return (
+              total +
+              `${value.name} (${value.quantity ?? ''} ${value.units ?? ''})`
+            )
+          }
+
+          if (value.type === 'cookware') {
+            return (
+              total +
+              `${value.name} (${value.quantity ?? ''} ${value.units ?? ''})`
+            )
+          }
+
+          if (value.type === 'timer') {
+            return (
+              total +
+              `${value.quantity ?? ''} ${value.units ?? ''} (${value.name})`
+            )
           }
 
           console.log(value)

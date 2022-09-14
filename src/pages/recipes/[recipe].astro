@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 
 const { recipe } = Astro.props
 
-const { title, servings } = recipe.metadata
+const { title, servings, time } = recipe.metadata
 ---
 
 <BaseLayout title={title}>
@@ -31,12 +31,12 @@ const { title, servings } = recipe.metadata
     <div class="stats shadow">
       <div class="stat">
         <div class="stat-title">Servings</div>
-        <div class="stat-value">{servings}</div>
+        <div class="stat-value">{servings ?? '??'}</div>
       </div>
 
       <div class="stat">
         <div class="stat-title">Cooking time</div>
-        <div class="stat-value">{servings}</div>
+        <div class="stat-value">{time ?? '??'}</div>
       </div>
     </div>
   </section>
