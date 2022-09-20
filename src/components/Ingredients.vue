@@ -1,8 +1,8 @@
 <template>
-  <div class="recipe-steps prose prose-lg">
+  <div class="recipe__ingredients">
     <ul>
       <li v-for="ingredient in recipe.ingredients">
-        {{ JSON.stringify(ingredient) }}
+        {{ ingredient.name }}
       </li>
     </ul>
   </div>

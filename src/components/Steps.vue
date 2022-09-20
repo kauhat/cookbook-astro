@@ -1,5 +1,5 @@
 <template>
-  <div class="recipe-steps">
+  <div class="recipe__steps">
     <ul class="list-disc">
       <li v-for="step in stepParts">
         <component v-for="part in step" :is="part?.component" v-bind="part?.data" />
