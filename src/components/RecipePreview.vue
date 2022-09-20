@@ -1,5 +1,5 @@
 <template>
-  <div class="recipe-preview card bg-base-100 shadow-sm">
+  <div class="recipe-preview card card-bordered	border-dashed bg-base-100 shadow-sm">
     <div class="card-body prose">
       <h3 class="title font-display text-2xl font-light">
         {{ recipe.metadata?.title }}
@@ -24,7 +24,7 @@ export default defineComponent({
     recipe: Recipe,
   },
   setup({ recipe }) {
-    console.log(recipe)
+    // console.log(recipe)
 
     const recipeUrl = `/recipes/${recipe.metadata.fileName}`
 
