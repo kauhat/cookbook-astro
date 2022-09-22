@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "octref.vetur",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+    "carlosjs23.vscode-yarn-script",
+    "astro-build.astro-vscode",
+    "dubadub.cook"
+  ]
+}

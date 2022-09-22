@@ -1,0 +1,5 @@
+{
+  "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
+  "prettier.configPath": "${workspaceRoot}/.prettierrc",
+  "prettier.enableDebugLogs": true
+}
