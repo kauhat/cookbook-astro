@@ -25,37 +25,53 @@ const { title, servings, time } = recipe.metadata
     <a href="/">Back to all recipes</a>
   </li>
 
-  <section class="intro px-4 mb-4">
-      <div class="grow">
-        <h1 class="font-display font-thin text-5xl mb-2">{title}</h1>
-      </div>
-  </section>
+  <div class="flex flex-grow flex-col md:flex-row">
+    <!-- Sidebar -->
+    <div class="flex flex-col md:max-w-md w-full">
+      <div class="px-4 mb-4">
+        <div class="stats stats-horizontal shadow">
+          <div class="stat">
+            <div class="stat-title">Servings</div>
+            <div class="stat-value">{servings ?? '??'}</div>
+          </div>
 
-  <div class="px-4 mb-4">
-    <div class="stats shadow">
-      <div class="stat">
-        <div class="stat-title">Servings</div>
-        <div class="stat-value">{servings ?? '??'}</div>
+          <div class="stat">
+            <div class="stat-title">Cooking time</div>
+            <div class="stat-value">{time ?? '??'}</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-title">Cooking time</div>
+            <div class="stat-value">{time ?? '??'}</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-title">Cooking time</div>
+            <div class="stat-value">{time ?? '??'}</div>
+          </div>
+        </div>
       </div>
 
-      <div class="stat">
-        <div class="stat-title">Cooking time</div>
-        <div class="stat-value">{time ?? '??'}</div>
+      <div class="card card-bordered card-compact border-dashed w-full">
+        <div class="card-body">
+          <h3 class="font-display font-bold text-2xl mb-2 underline">
+            Ingredients
+          </h3>
+          <Ingredients recipe={recipe} />
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="flex flex-grow">
-    <div class="card card-bordered card-compact underline border-dashed max-w-md w-full">
-      <div class="card-body">
-        <h3 class="font-display font-bold text-2xl mb-2">Ingredients</h3>
-        <Ingredients recipe={recipe} />
-      </div>
-    </div>
-
+    <!-- Main content -->
     <div class="order-first w-full p-4">
+      <section class="intro mb-4">
+        <div class="grow">
+          <h1 class="font-display font-thin text-5xl mb-2">{title}</h1>
+        </div>
+      </section>
+
       <h3 class="font-display underline font-bold text-2xl mb-2">Steps</h3>
-      <Steps recipe={recipe} client:load/>
+      <Steps recipe={recipe} client:load />
     </div>
   </div>
 </BaseLayout>

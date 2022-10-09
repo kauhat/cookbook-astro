@@ -16,8 +16,5 @@ export default defineComponent({
   props: {
     recipe: Recipe,
   },
-  setup({recipe}) {
-    // console.log(recipe)
-  }
 })
 </script>
