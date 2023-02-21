@@ -1,19 +1,17 @@
 ---
 import RecipePreview from '../../components/RecipePreview.vue'
-import { useRecipesStore, buildRecipePath } from '../../stores/recipes.ts'
 import Steps from '../../components/Steps.vue'
 import Ingredients from '../../components/Ingredients.vue'
 import BaseLayout from '../../layouts/BaseLayout.astro'
+// import { buildRecipePath, getAllRecipes } from '../../data/recipes'
+import { getCollection } from 'astro:content'
 
-export async function getStaticPaths() {
-  const recipesStore = useRecipesStore()
+// export async function getStaticPaths() {
+//   const paths = (await getCollection('recipe'))
+//     .map((recipeData) => buildRecipePath(recipeData))
 
-  const paths = await recipesStore.recipePaths
-
-  // console.log(JSON.stringify({paths}))
-
-  return [...paths]
-}
+//   return [...paths]
+// }
 
 const { recipe } = Astro.props
 

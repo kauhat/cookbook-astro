@@ -1,13 +1,14 @@
 ---
-// import RecipePreview from '../components/RecipePreview.astro';
+import RecipeListItem from '../components/RecipeListItem.vue';
 import RecipePreview from '../components/RecipePreview.vue'
-import { useRecipesStore } from '../stores/recipes.ts'
 import { Recipe } from '@cooklang/cooklang-ts'
 import BaseLayout from '../layouts/BaseLayout.astro'
+// import { getAllRecipes } from '../data/recipes';
+import { getCollection } from 'astro:content';
 
-const recipesStore = useRecipesStore()
+const allRecipes = await getCollection('recipe')
 
-const allRecipes = await recipesStore.recipes
+console.log(allRecipes)
 
 // console.log({ store, state, allRecipes })
 
@@ -32,7 +33,7 @@ const allRecipes = await recipesStore.recipes
     {
       allRecipes.map(
         (recipe: Recipe) =>
-          recipe && <RecipePreview recipe={recipe} class="card-compact" />
+          recipe && <li><RecipeListItem recipe={recipe} client:only /></li>
       )
     }
   </section>

@@ -6,6 +6,7 @@
     "editorconfig.editorconfig",
     "carlosjs23.vscode-yarn-script",
     "astro-build.astro-vscode",
-    "dubadub.cook"
+    "dubadub.cook",
+    "Vue.volar"
   ]
 }

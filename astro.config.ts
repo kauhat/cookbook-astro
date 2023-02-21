@@ -26,30 +26,30 @@ export default defineConfig({
     //   },
     // }
   ],
-  vite: {
-    plugins: [
-      // browserifyPlugin(resolve),
-      // ViteCooklangRecipeLoaderPlugin()
-      // eslintPlugin(),
-    ],
-    resolve: {
-      alias: {
-        '@recipes': getRecipesPath(), // ...stdLibBrowser,
-      },
-    },
-    optimizeDeps: {
-      include: [
-        // 'buffer', 'process', '@cooklang/cooklang-ts'
-      ],
-    },
-    build: {
-      // rollupOptions: {
-      //   plugins: [
-      //     // Enable rollup polyfills plugin
-      //     // used during production bundling
-      //     rollupNodePolyFill(),
-      //   ],
-      // },
-    },
-  },
+  // vite: {
+  //   plugins: [
+  //     // browserifyPlugin(resolve),
+  //     // ViteCooklangRecipeLoaderPlugin()
+  //     // eslintPlugin(),
+  //   ],
+  //   resolve: {
+  //     alias: {
+  //       '@recipes': getRecipesPath(), // ...stdLibBrowser,
+  //     },
+  //   },
+  //   optimizeDeps: {
+  //     include: [
+  //       // 'buffer', 'process', '@cooklang/cooklang-ts'
+  //     ],
+  //   },
+  //   build: {
+  //     // rollupOptions: {
+  //     //   plugins: [
+  //     //     // Enable rollup polyfills plugin
+  //     //     // used during production bundling
+  //     //     rollupNodePolyFill(),
+  //     //   ],
+  //     // },
+  //   },
+  // },
 })
