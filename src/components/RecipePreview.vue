@@ -24,7 +24,7 @@ import { buildRecipeUrl, LoadedRecipeData } from '../data/recipes'
 
 export default defineComponent({
   props: {
-    recipe: Object as PropType<LoadedRecipeData>
+    recipe: Object as PropType<LoadedRecipeData>,
   },
   setup({ recipe }) {
     const recipeUrl = buildRecipeUrl(recipe)

@@ -38,7 +38,7 @@ export default defineComponent({
         return parts.map((part) => {
           if (part.type === 'text') {
             const { value } = part
-            console.log({ value })
+            // console.log({ value })
 
             return {
               component: createTextVNode(value),

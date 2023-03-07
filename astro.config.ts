@@ -14,7 +14,7 @@ export default defineConfig({
   integrations: [
     vue(),
     tailwind(),
-    cooklang()
+    cooklang(),
     // {
     //   name: 'pinia',
     //   hooks: {
