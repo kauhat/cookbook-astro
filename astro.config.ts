@@ -7,16 +7,14 @@ import inject from '@rollup/plugin-inject'
 import stdLibBrowser from 'node-stdlib-browser'
 import vue from '@astrojs/vue'
 import tailwind from '@astrojs/tailwind'
-import {
-  ViteCooklangRecipeLoaderPlugin,
-  getRecipesPath,
-} from './src/lib/vite-cooklang-loader'
+import cooklang from '@astrojs/cooklang'
 
 // https://astro.build/config
 export default defineConfig({
   integrations: [
     vue(),
     tailwind(),
+    cooklang()
     // {
     //   name: 'pinia',
     //   hooks: {
@@ -26,30 +24,4 @@ export default defineConfig({
     //   },
     // }
   ],
-  // vite: {
-  //   plugins: [
-  //     // browserifyPlugin(resolve),
-  //     // ViteCooklangRecipeLoaderPlugin()
-  //     // eslintPlugin(),
-  //   ],
-  //   resolve: {
-  //     alias: {
-  //       '@recipes': getRecipesPath(), // ...stdLibBrowser,
-  //     },
-  //   },
-  //   optimizeDeps: {
-  //     include: [
-  //       // 'buffer', 'process', '@cooklang/cooklang-ts'
-  //     ],
-  //   },
-  //   build: {
-  //     // rollupOptions: {
-  //     //   plugins: [
-  //     //     // Enable rollup polyfills plugin
-  //     //     // used during production bundling
-  //     //     rollupNodePolyFill(),
-  //     //   ],
-  //     // },
-  //   },
-  // },
 })
