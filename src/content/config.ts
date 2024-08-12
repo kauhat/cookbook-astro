@@ -1,10 +1,22 @@
-// 1. Import utilities from `astro:content`
 import { z, defineCollection } from 'astro:content'
+import { recipeSchema } from 'astro-cooklang'
 
-// 2. Define a schema for each collection you'd like to validate.
-const recipes = defineCollection({})
+const recipes = defineCollection({
+  schema: z.object({
+    // Add recipe properties.
+    ...recipeSchema,
 
-// 3. Export a single `collections` object to register your collection(s)
+    title: z.string().optional(),
+    category: z.string().optional(),
+
+    // TODO: How should metadata property object/array output work?
+    // tags: z
+    //   .array(z.string())
+    //   // .any()
+    //   .default([]),
+  }),
+})
+
 export const collections = {
   recipes,
 }

@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts">
-import {
-  Recipe,
+import { Recipe } from '@cooklang/cooklang-ts'
+import type {
   Ingredient as IngredientType,
   Cookware as CookwareType,
   Timer as TimerType,

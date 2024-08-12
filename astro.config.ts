@@ -7,7 +7,7 @@ import inject from '@rollup/plugin-inject'
 import stdLibBrowser from 'node-stdlib-browser'
 import vue from '@astrojs/vue'
 import tailwind from '@astrojs/tailwind'
-import cooklang from '@astrojs/cooklang'
+import cooklang from 'astro-cooklang'
 
 // https://astro.build/config
 export default defineConfig({

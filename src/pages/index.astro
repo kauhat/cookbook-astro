@@ -1,6 +1,6 @@
 ---
 import RecipeListItem from '../components/RecipeListItem.vue'
-import RecipePreview from '../components/RecipePreview.vue'
+// import RecipePreview from '../components/RecipePreview.vue'
 import BaseLayout from '../layouts/BaseLayout.astro'
 // import { getAllRecipes } from '../data/recipes';
 import { getCollection } from 'astro:content'
@@ -35,10 +35,10 @@ console.log(allRecipes)
   <section class="mx-6 grid grid-cols-4 gap-4">
     {
       allRecipes.map(
-        (recipe: Recipe) =>
-          recipe && (
+        (entry) =>
+           (
             <li>
-              <RecipeListItem recipe={recipe} client:only />
+              <RecipeListItem recipe={entry} client:idle />
             </li>
           )
       )

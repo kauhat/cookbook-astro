@@ -10,7 +10,8 @@
 
 <script lang="ts">
 import { Recipe } from '@cooklang/cooklang-ts'
-import { defineComponent, PropType } from 'vue'
+import type { PropType } from 'vue'
+import { defineComponent } from 'vue'
 import { LoadedRecipeData } from '../data/recipes'
 
 export default defineComponent({

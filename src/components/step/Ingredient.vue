@@ -7,8 +7,10 @@
 </template>
 
 <script lang="ts">
-import { Recipe, Ingredient } from '@cooklang/cooklang-ts'
-import { defineComponent, PropType } from 'vue'
+import { Recipe } from '@cooklang/cooklang-ts'
+import type { Ingredient } from '@cooklang/cooklang-ts'
+import type { PropType } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   props: {
