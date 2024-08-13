@@ -1,6 +1,6 @@
 ---
-import '../global.css'
-const { title } = Astro.props
+import "../global.css";
+const { title } = Astro.props;
 ---
 
 <html lang="en">
@@ -10,11 +10,11 @@ const { title } = Astro.props
     <title>{title}</title>
   </head>
 
-  <body class="flex flex-col min-h-screen">
+  <body class="flex min-h-screen flex-col">
     <div class="navbar shadow-sm">
       <div class="md:container md:mx-auto">
         <div class="flex-1">
-          <a class="btn btn-ghost normal-case text-xl hidden">Recipes</a>
+          <a class="btn btn-ghost hidden text-xl normal-case">Recipes</a>
         </div>
 
         <div class="flex-none">
@@ -27,7 +27,7 @@ const { title } = Astro.props
       </div>
     </div>
 
-    <div class="md:container md:mx-auto mt-12 mb-8 flex flex-col grow">
+    <div class="mb-8 mt-12 flex grow flex-col md:container md:mx-auto">
       <slot />
     </div>
   </body>

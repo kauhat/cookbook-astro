@@ -4,7 +4,7 @@
       {{ title }}
     </h3>
 
-    <p class="servings">Servings: {{ recipe.metadata?.servings ?? '??' }}</p>
+    <p class="servings">Servings: {{ recipe?.data.servings ?? "??" }}</p>
 
     <div class="card-actions justify-end">
       <a :href="recipeUrl" class="btn btn-outline btn-primary btn-sm"
@@ -15,27 +15,22 @@
 </template>
 
 <script lang="ts">
-import { Recipe } from '@cooklang/cooklang-ts'
-import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import { buildRecipeUrl, LoadedRecipeData } from '../data/recipes'
+import type { PropType } from "vue";
+import { defineComponent } from "vue";
+import type { CollectionEntry } from "astro:content";
 
 export default defineComponent({
   props: {
-    recipe: Object as PropType<LoadedRecipeData>,
+    recipe: Object as PropType<CollectionEntry<"recipes">>,
   },
   setup({ recipe }) {
-    const recipeUrl = buildRecipeUrl(recipe)
-
-    console.log(recipe)
-
-    const title = recipe.data.metadata?.title ?? ''
+    const recipeUrl = `/recipes/${recipe?.slug}`;
+    const title = recipe?.data.metadata?.title ?? "";
 
     return {
-      // recipe
       title,
       recipeUrl,
-    }
+    };
   },
-})
+});
 </script>

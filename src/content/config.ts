@@ -1,5 +1,5 @@
-import { z, defineCollection } from 'astro:content'
-import { recipeSchema } from 'astro-cooklang'
+import { recipeSchema } from "astro-cooklang";
+import { defineCollection, z } from "astro:content";
 
 const recipes = defineCollection({
   schema: z.object({
@@ -17,8 +17,8 @@ const recipes = defineCollection({
     //   // .any()
     //   .default([]),
   }),
-})
+});
 
 export const collections = {
   recipes,
-}
+};

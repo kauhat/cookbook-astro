@@ -1,15 +1,10 @@
-import { defineConfig } from 'astro/config'
-import vue from '@astrojs/vue'
-import tailwind from '@astrojs/tailwind'
+import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
-import cooklang from 'astro-cooklang'
+import tailwind from "@astrojs/tailwind";
+import vue from "@astrojs/vue";
+import cooklang from "astro-cooklang";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    vue(),
-    tailwind(),
-    sitemap(),
-    cooklang(),
-  ],
-})
+  integrations: [vue(), tailwind(), sitemap(), cooklang()],
+});

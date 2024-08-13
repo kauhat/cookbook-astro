@@ -7,25 +7,24 @@
 </template>
 
 <script lang="ts">
-import { Recipe } from '@cooklang/cooklang-ts'
-import type { Ingredient } from '@cooklang/cooklang-ts'
-import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
+import type { Ingredient } from "@cooklang/cooklang-ts";
+import type { PropType } from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
     ingredient: Object as PropType<Ingredient>,
   },
   setup({ ingredient }) {
-    const { name, quantity, units } = ingredient
+    const { name, quantity, units } = ingredient;
 
     return {
       name,
       quantity,
       units,
-    }
+    };
   },
-})
+});
 </script>
 
 <style>

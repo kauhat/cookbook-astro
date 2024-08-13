@@ -1,7 +1,7 @@
 <template>
   <div class="recipe__ingredients">
     <ul>
-      <li v-for="ingredient in recipe.ingredients">
+      <li v-for="ingredient in recipe?.data.ingredients">
         {{ ingredient.name }}
       </li>
     </ul>
@@ -9,14 +9,13 @@
 </template>
 
 <script lang="ts">
-import { Recipe } from '@cooklang/cooklang-ts'
-import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import { LoadedRecipeData } from '../data/recipes'
+import type { PropType } from "vue";
+import { defineComponent } from "vue";
+import type { CollectionEntry } from "astro:content";
 
 export default defineComponent({
   props: {
-    recipe: Object as PropType<LoadedRecipeData>,
+    recipe: Object as PropType<CollectionEntry<"recipes">>,
   },
-})
+});
 </script>

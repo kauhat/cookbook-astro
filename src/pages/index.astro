@@ -1,50 +1,30 @@
 ---
-import RecipeListItem from '../components/RecipeListItem.vue'
 // import RecipePreview from '../components/RecipePreview.vue'
-import BaseLayout from '../layouts/BaseLayout.astro'
-// import { getAllRecipes } from '../data/recipes';
-import { getCollection } from 'astro:content'
+import RecipeListItem from "../components/RecipeListItem.vue";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
-const allRecipes = await getCollection('recipes')
-
-console.log(allRecipes)
-
-// console.log({ store, state, allRecipes })
-
-// .map(function (recipe: Recipe) {
-// 	return { params: { recipe }};
-// });
-
-// console.log(allRecipes)
+const allRecipes = await getCollection("recipes");
 
 // allRecipes = allRecipes.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/core-concepts/astro-components/
 ---
 
 <BaseLayout title="All recipes">
-  <section
-    class="py-4 px-2 mx-6 mb-8 bg-base-content shadow rounded"
-  >
-    <h1 class="font-display font-bold text-6xl text-white leading-none">
+  <section class="mx-6 mb-8 rounded bg-base-content px-2 py-4 shadow">
+    <h1 class="font-display text-6xl font-bold leading-none text-white">
       Recipes
     </h1>
   </section>
 
-  <section class="mx-6 grid grid-cols-4 gap-4 list-none">
+  <section class="mx-6 grid list-none grid-cols-4 gap-4">
     {
-      allRecipes.map(
-        (entry) =>
-           (
-            <li>
-              <RecipeListItem recipe={entry} client:idle />
-            </li>
-          )
-      )
+      allRecipes.map((entry) => (
+        <li>
+          <RecipeListItem recipe={entry} client:idle />
+        </li>
+      ))
     }
   </section>
 </BaseLayout>
 
-<style>
-</style>
+<style></style>

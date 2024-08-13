@@ -1,9 +1,9 @@
 ---
 // import RecipePreview from '../../components/RecipePreview.vue'
-import Steps from '../../components/Steps.vue'
-import Ingredients from '../../components/Ingredients.vue'
-import BaseLayout from '../../layouts/BaseLayout.astro'
-import { getCollection } from 'astro:content'
+import Steps from "../../components/Steps.vue";
+import Ingredients from "../../components/Ingredients.vue";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const recipeEntries = await getCollection("recipes");
@@ -19,40 +19,38 @@ export async function getStaticPaths() {
   });
 }
 
-
-const { entry } = Astro.props
+const { entry } = Astro.props;
 const { Content } = await entry.render();
-
 ---
 
-<BaseLayout title={entry.data.title ?? '??'}>
+<BaseLayout title={entry.data.title ?? "??"}>
   <li slot="menu">
     <a href="/">Back to all recipes</a>
   </li>
 
-  <div class="flex flex-grow flex-col f md:flex-row">
+  <div class="f flex flex-grow flex-col md:flex-row">
     <!-- Sidebar -->
-    <div class="flex flex-col md:max-w-md w-full">
-      <div class="px-4 mb-4">
+    <div class="flex w-full flex-col md:max-w-md">
+      <div class="mb-4 px-4">
         <div class="stats stats-horizontal shadow">
           <div class="stat">
             <div class="stat-title">Servings</div>
-            <div class="stat-value">{entry.data?.servings ?? '??'}</div>
+            <div class="stat-value">{entry.data?.servings ?? "??"}</div>
           </div>
 
           <div class="stat">
             <div class="stat-title">Cooking time</div>
-            <div class="stat-value">{entry.data?.time ?? '??'}</div>
+            <div class="stat-value">{entry.data?.time ?? "??"}</div>
           </div>
         </div>
       </div>
 
-      <div class="card card-bordered card-compact border-dashed w-full">
+      <div class="card card-bordered card-compact w-full border-dashed">
         <div class="card-body">
-          <h3 class="font-display font-bold text-2xl mb-2 underline">
+          <h3 class="mb-2 font-display text-2xl font-bold underline">
             Ingredients
           </h3>
-          <Ingredients recipe={entry.data} />
+          <Ingredients recipe={entry} />
         </div>
       </div>
     </div>
@@ -61,12 +59,14 @@ const { Content } = await entry.render();
     <div class="order-first w-full p-4">
       <section class="mb-4">
         <div class="grow">
-          <h1 class="font-display font-thin text-5xl mb-2">{entry.data?.title}</h1>
+          <h1 class="mb-2 font-display text-5xl font-thin">
+            {entry.data?.title}
+          </h1>
         </div>
       </section>
 
-      <h3 class="font-display underline font-bold text-2xl mb-2">Steps</h3>
-      <Steps recipe={entry.data} client:idle />
+      <h3 class="mb-2 font-display text-2xl font-bold underline">Steps</h3>
+      <Steps recipe={entry} />
     </div>
   </div>
 </BaseLayout>
