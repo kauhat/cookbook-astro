@@ -4,7 +4,7 @@
       {{ title }}
     </h3>
 
-    <p class="servings">Servings: {{ recipe?.data.servings ?? "??" }}</p>
+    <p class="servings">Servings: {{ recipe?.data.servings ?? "?" }}</p>
 
     <div class="card-actions justify-end">
       <a :href="recipeUrl" class="btn btn-outline btn-primary btn-sm"
@@ -25,7 +25,7 @@ export default defineComponent({
   },
   setup({ recipe }) {
     const recipeUrl = `/recipes/${recipe?.slug}`;
-    const title = recipe?.data.metadata?.title ?? "";
+    const title = recipe?.data?.title ?? recipe?.id;
 
     return {
       title,

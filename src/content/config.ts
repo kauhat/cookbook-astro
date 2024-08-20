@@ -8,8 +8,9 @@ const recipes = defineCollection({
 
     title: z.string().optional(),
     category: z.string().optional(),
-    servings: z.string().optional(), // z.optional(z.coerce.number()),
-    time: z.optional(z.coerce.number()),
+    source: z.string().optional(),
+    servings: z.optional(z.coerce.string()), // z.optional(z.coerce.number()),
+    time: z.optional(z.coerce.string()), // z.optional(z.coerce.number()),
 
     // TODO: How should metadata property object/array output work?
     // tags: z

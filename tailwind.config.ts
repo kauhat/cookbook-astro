@@ -13,7 +13,7 @@ export default {
   },
   plugins: [typo, daisyui],
   daisyui: {
-    themes: ["winter", "night"],
+    themes: ["lofi", "pastel", "winter", "bumble", "autumn", "night"],
   },
-  darkMode: ["class", '[data-theme="night"]'],
+  // darkMode: ["class", '[data-theme="night"]'],
 };

@@ -1,6 +1,6 @@
 ---
 import "../global.css";
-const { title } = Astro.props;
+const { title, navbar } = Astro.props;
 ---
 
 <html lang="en">
@@ -10,22 +10,26 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
 
-  <body class="flex min-h-screen flex-col">
-    <div class="navbar shadow-sm">
-      <div class="md:container md:mx-auto">
-        <div class="flex-1">
-          <a class="btn btn-ghost hidden text-xl normal-case">Recipes</a>
-        </div>
+  <body class="flex min-h-screen flex-col prose-headings:font-display">
+    {
+      navbar && (
+        <div class="navbar border-b border-base-300 shadow-sm">
+          <div class="md:container md:mx-auto">
+            <div class="flex-1">
+              <a class="btn btn-ghost hidden text-xl normal-case">Recipes</a>
+            </div>
 
-        <div class="flex-none">
-          <ul class="menu menu-horizontal p-0">
-            <slot name="menu" />
+            <div class="flex-none">
+              <ul class="menu menu-horizontal p-0">
+                <slot name="menu" />
 
-            <!-- <li><a href="/">All recipes</a></li> -->
-          </ul>
+                {/* <!-- <li><a href="/">All recipes</a></li> --> */}
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )
+    }
 
     <div class="mb-8 mt-12 flex grow flex-col md:container md:mx-auto">
       <slot />

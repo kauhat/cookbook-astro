@@ -1,18 +1,21 @@
 <template>
   <div
-    class="recipe-preview card card-bordered card-compact border-dashed bg-base-100 shadow-sm"
+    class="recipe-preview card card-bordered card-compact border-base-300 bg-base-100 shadow-sm"
   >
-    <div class="card-body prose">
+    <div class="card-body prose prose-sm">
       <h3 class="title font-display text-2xl font-light">
-        {{ recipe?.data.title }}
+        {{ title }}
       </h3>
 
-      <p class="servings">Servings: {{ recipe?.data.servings ?? "??" }}</p>
+      <div>
+        <span v-if="servings" class="badge badge-neutral">
+          Servings: {{ servings }}
+        </span>
+        <span v-if="time" class="badge badge-neutral"> Time: {{ time }} </span>
+      </div>
 
       <div class="card-actions justify-end">
-        <a :href="recipeUrl" class="btn btn-outline btn-primary btn-sm"
-          >Read more</a
-        >
+        <a :href="url" class="btn btn-outline btn-primary btn-sm">Read more</a>
       </div>
     </div>
   </div>
@@ -28,10 +31,15 @@ export default defineComponent({
     recipe: Object as PropType<CollectionEntry<"recipes">>,
   },
   setup({ recipe }) {
-    const recipeUrl = `/recipes/${recipe?.slug}`;
+    const { title: recipeTitle, servings, time } = recipe?.data;
+    const url = `/recipes/${recipe?.slug}`;
+    const title = recipeTitle ?? recipe?.id;
 
     return {
-      recipeUrl,
+      url,
+      title,
+      servings,
+      time,
     };
   },
 });

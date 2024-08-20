@@ -1,27 +1,21 @@
 ---
-import RecipePreview from '../components/RecipePreview.vue'
+import RecipePreview from "../components/RecipePreview.vue";
 import RecipeListItem from "../components/RecipeListItem.vue";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const allRecipes = await getCollection("recipes");
 
-// allRecipes = allRecipes.sort((a, b) => new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf());
+// const cookRecipes = allRecipes.filter((entry) => entry.id.includes(".cook"));
 ---
 
 <BaseLayout title="All recipes">
-  <section class="mx-6 mb-8 text-center py-4">
-    <h1 class="font-display text-6xl font-bold leading-none">
-      Recipes
-    </h1>
+  <section class="mx-6 mb-8 py-4 text-center">
+    <h1 class="font-display text-6xl font-bold leading-none">Recipes</h1>
   </section>
 
   <section class="mx-6 grid grid-cols-4 gap-4">
-    {
-      allRecipes.map((entry) => (
-        <RecipePreview recipe={entry} client:idle />
-      ))
-    }
+    {allRecipes.sort((a, b) => a.id < b.id).map((entry) => <RecipePreview recipe={entry} client:idle />)}
   </section>
 </BaseLayout>
 

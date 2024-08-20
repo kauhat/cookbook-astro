@@ -1,7 +1,7 @@
 ---
 // import RecipePreview from '../../components/RecipePreview.vue'
 import Steps from "../../components/Steps.vue";
-import Ingredients from "../../components/Ingredients.vue";
+import Sidebar from "../../components/RecipeSidebar.vue";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
@@ -21,52 +21,55 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const isCooklang = entry.id.includes(".cook");
+const title = entry.data.title;
 ---
 
-<BaseLayout title={entry.data.title ?? "??"}>
+<BaseLayout title={title ?? entry.id} navbar={true}>
   <li slot="menu">
     <a href="/">Back to all recipes</a>
   </li>
 
-  <div class="f flex flex-grow flex-col md:flex-row">
+  <div class="flex flex-grow flex-col px-4 md:flex-row">
     <!-- Sidebar -->
-    <div class="flex w-full flex-col md:max-w-md">
-      <div class="mb-4 px-4">
-        <div class="stats stats-horizontal shadow">
-          <div class="stat">
-            <div class="stat-title">Servings</div>
-            <div class="stat-value">{entry.data?.servings ?? "??"}</div>
-          </div>
-
-          <div class="stat">
-            <div class="stat-title">Cooking time</div>
-            <div class="stat-value">{entry.data?.time ?? "??"}</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card card-bordered card-compact w-full border-dashed">
-        <div class="card-body">
-          <h3 class="mb-2 font-display text-2xl font-bold underline">
-            Ingredients
-          </h3>
-          <Ingredients recipe={entry} />
-        </div>
-      </div>
+    <div class="flex w-full flex-col md:max-w-sm">
+      {
+        isCooklang && (
+          <>
+            <Sidebar recipe={entry} />
+          </>
+        )
+      }
     </div>
 
     <!-- Main content -->
-    <div class="order-first w-full p-4">
-      <section class="mb-4">
-        <div class="grow">
-          <h1 class="mb-2 font-display text-5xl font-thin">
-            {entry.data?.title}
-          </h1>
-        </div>
-      </section>
+    <div class="order-first w-full">
+      <section class="prose prose-lg mb-4">
+        {
+          title && (
+            <>
+              <h1 class="mb-4">{title}</h1>
+            </>
+          )
+        }
 
-      <h3 class="mb-2 font-display text-2xl font-bold underline">Steps</h3>
-      <Steps recipe={entry} />
+        {
+          isCooklang ? (
+            <>
+              <div class="prose-lg" />
+              <h3 class="">Steps</h3>
+
+              <Steps recipe={entry} />
+            </>
+          ) : (
+            <>
+              <article class="prose-lg">
+                <Content />
+              </article>
+            </>
+          )
+        }
+      </section>
     </div>
   </div>
 </BaseLayout>

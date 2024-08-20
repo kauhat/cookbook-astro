@@ -1,6 +1,6 @@
 <template>
-  <div class="recipe__steps">
-    <ul class="list-disc">
+  <div class="recipe__steps prose prose-lg">
+    <ol>
       <li v-for="step in stepParts">
         <component
           v-for="part in step"
@@ -8,7 +8,7 @@
           v-bind="part?.data"
         />
       </li>
-    </ul>
+    </ol>
   </div>
 </template>
 

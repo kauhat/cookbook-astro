@@ -1,8 +1,8 @@
 <template>
-  <span class="ingredient">
+  <span class="ingredient gap-2">
     {{ name }}
 
-    <em class="ingredient__quantity">({{ quantity }} {{ units }})</em>
+    <em class="ingredient__quantity">{{ quantity }} {{ units }}</em>
   </span>
 </template>
 
@@ -38,5 +38,9 @@ export default defineComponent({
 
   /* margin: -1px 0;
         padding: 0 4px; */
+}
+
+.ingredient__quantity {
+  @apply badge badge-outline badge-xs;
 }
 </style>
