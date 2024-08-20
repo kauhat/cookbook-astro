@@ -15,7 +15,11 @@ const allRecipes = await getCollection("recipes");
   </section>
 
   <section class="mx-6 grid grid-cols-4 gap-4">
-    {allRecipes.sort((a, b) => a.id < b.id).map((entry) => <RecipePreview recipe={entry} client:idle />)}
+    {
+      allRecipes
+        .sort((a, b) => a.id.localeCompare(b.id))
+        .map((entry) => <RecipePreview recipe={entry} client:idle />)
+    }
   </section>
 </BaseLayout>
 
